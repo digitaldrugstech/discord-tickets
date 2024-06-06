@@ -632,7 +632,8 @@ module.exports = class TicketManager {
 			openingMessageId: sent.id,
 			topic: topic ? encrypt(topic) : null,
 		};
-		if (referencesTicketId) data.referencesTicket = { connect: { id: referencesTicketId } };
+		const existingTicket = await this.client.prisma.ticket.findUnique({ where: { id: referencesTicketId } });
+		if (referencesTicketId && existingTicket) data.referencesTicket = { connect: { id: referencesTicketId } };
 		if (answers) data.questionAnswers = { createMany: { data: answers } };
 
 		await interaction.editReply({
