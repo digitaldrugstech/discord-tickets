@@ -22,7 +22,6 @@ module.exports = class PrioritySlashCommand extends SlashCommand {
 			descriptionLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.description`),
 			dmPermission: false,
 			name,
-			nameLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.name`),
 			options: [
 				{
 					choices: ['HIGH', 'MEDIUM', 'LOW'],
@@ -33,11 +32,9 @@ module.exports = class PrioritySlashCommand extends SlashCommand {
 			].map(option => {
 				option.descriptionLocalizations = client.i18n.getAllMessages(`commands.slash.${name}.options.${option.name}.description`);
 				option.description = option.descriptionLocalizations['en-GB'];
-				option.nameLocalizations = client.i18n.getAllMessages(`commands.slash.${name}.options.${option.name}.name`);
 				if (option.choices) {
 					option.choices = option.choices.map(choice => ({
 						name: client.i18n.getMessage(null, `commands.slash.priority.options.${option.name}.choices.${choice}`),
-						nameLocalizations: client.i18n.getAllMessages(`commands.slash.priority.options.${option.name}.choices.${choice}`),
 						value: choice,
 					}));
 				}
