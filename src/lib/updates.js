@@ -58,7 +58,7 @@ module.exports = client => {
 				if (process.env.PUBLIC_BOT !== 'true') {
 					const guilds = await client.prisma.guild.findMany({ where: { logChannel: { not: null } } });
 					for (const guild of guilds) {
-						const getMessage = client.i18n.getLocale(guild.locale);
+						const getMessage = client.i18n.getLocale('ru');
 						await client.channels.cache.get(guild.logChannel).send({
 							embeds: [
 								new ExtendedEmbedBuilder()

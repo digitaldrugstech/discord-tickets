@@ -25,7 +25,7 @@ module.exports = {
 			},
 			where: { id: interaction.guild.id },
 		});
-		const getMessage = client.i18n.getLocale(settings.locale);
+		const getMessage = client.i18n.getLocale('ru');
 		if (settings.categories.length === 0) {
 			interaction.reply({
 				components: [],

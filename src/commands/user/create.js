@@ -38,7 +38,7 @@ module.exports = class CreateUserCommand extends UserCommand {
 			include: { categories:true },
 			where: { id: interaction.guild.id },
 		});
-		const getMessage = client.i18n.getLocale(settings.locale);
+		const getMessage = client.i18n.getLocale('ru');
 
 		if (!await isStaff(interaction.guild, interaction.user.id)) {
 			return await interaction.editReply({

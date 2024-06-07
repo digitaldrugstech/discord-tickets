@@ -170,7 +170,7 @@ module.exports = class TicketManager {
 					locale: 'en-GB',
 				};
 			}
-			const getMessage = this.client.i18n.getLocale(settings.locale);
+			const getMessage = this.client.i18n.getLocale('ru');
 			return await interaction.reply({
 				embeds: [
 					new ExtendedEmbedBuilder({
@@ -188,7 +188,7 @@ module.exports = class TicketManager {
 		/** @type {import("discord.js").Guild} */
 		const guild = this.client.guilds.cache.get(category.guild.id);
 		const member = interaction.member ?? await guild.members.fetch(interaction.user.id);
-		const getMessage = this.client.i18n.getLocale(category.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 
 		const rlKey = `ratelimits/guild-user:${category.guildId}-${interaction.user.id}`;
 		const rl = await this.client.keyv.get(rlKey);
@@ -383,7 +383,7 @@ module.exports = class TicketManager {
 
 		/** @type {import("discord.js").Guild} */
 		const guild = this.client.guilds.cache.get(category.guild.id);
-		const getMessage = this.client.i18n.getLocale(category.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		const creator = await guild.members.fetch(interaction.user.id);
 		const number = await this.getNextNumber(category.guild.id);
 		const channelName = category.channelName
@@ -774,7 +774,7 @@ module.exports = class TicketManager {
 			},
 			where: { id: interaction.channel.id },
 		});
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 
 		if (!(await isStaff(interaction.guild, interaction.user.id))) { // if user is not staff
 			return await interaction.editReply({
@@ -874,7 +874,7 @@ module.exports = class TicketManager {
 			},
 			where: { id: interaction.channel.id },
 		});
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 
 		if (!(await isStaff(interaction.guild, interaction.user.id))) { // if user is not staff
 			return await interaction.editReply({
@@ -956,7 +956,7 @@ module.exports = class TicketManager {
 	}
 
 	buildFeedbackModal(locale, id) {
-		const getMessage = this.client.i18n.getLocale(locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		return new ModalBuilder()
 			.setCustomId(JSON.stringify({
 				action: 'feedback',
@@ -1000,7 +1000,6 @@ module.exports = class TicketManager {
 			const {
 				errorColour,
 				footer,
-				locale,
 			} = await this.client.prisma.guild.findUnique({
 				select: {
 					errorColour: true,
@@ -1008,7 +1007,7 @@ module.exports = class TicketManager {
 				},
 				where: { id: interaction.guild.id },
 			});
-			const getMessage = this.client.i18n.getLocale(locale);
+			const getMessage = this.client.i18n.getLocale('ru');
 			return await interaction.editReply({
 				embeds: [
 					new ExtendedEmbedBuilder({
@@ -1022,7 +1021,7 @@ module.exports = class TicketManager {
 			});
 		}
 
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		const staff = await isStaff(interaction.guild, interaction.user.id);
 		const reason = interaction.options?.getString('reason', false) || null; // ?. because it could be a button interaction
 
@@ -1071,7 +1070,7 @@ module.exports = class TicketManager {
 	async requestClose(interaction, reason) {
 		// interaction could be command, button. or modal
 		const ticket = await this.getTicket(interaction.channel.id);
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		const staff = interaction.user.id !== ticket.createdById && await isStaff(interaction.guild, interaction.user.id);
 		const closeButtonId = {
 			action: 'close',
@@ -1140,7 +1139,7 @@ module.exports = class TicketManager {
 	async acceptClose(interaction) {
 		const ticket = await this.getTicket(interaction.channel.id);
 		const $ticket = this.$stale.get(interaction.channel.id);
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		await interaction.editReply({
 			embeds: [
 				new ExtendedEmbedBuilder({
@@ -1166,7 +1165,7 @@ module.exports = class TicketManager {
 	}) {
 		if (this.$stale.has(ticketId)) this.$stale.delete(ticketId);
 		let ticket = await this.getTicket(ticketId);
-		const getMessage = this.client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = this.client.i18n.getLocale('ru');
 		this.$count.categories[ticket.categoryId].total -= 1;
 		this.$count.categories[ticket.categoryId][ticket.createdById] -= 1;
 

@@ -48,7 +48,7 @@ module.exports = class FeedbackModal extends Modal {
 		if (id.next === 'requestClose') await client.tickets.requestClose(interaction, id.reason);
 		else if (id.next === 'acceptClose') await client.tickets.acceptClose(interaction);
 
-		const getMessage = client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = client.i18n.getLocale('ru');
 
 		// `followUp` must go after `reply`/`editReply` (the above)
 		if (comment?.length > 0 && rating !== null) {

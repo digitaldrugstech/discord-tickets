@@ -29,7 +29,7 @@ module.exports.post = fastify => ({
 			},
 			where: { id: guild.id },
 		});
-		const getMessage = client.i18n.getLocale(settings.locale);
+		const getMessage = client.i18n.getLocale('ru');
 		const categories = settings.categories.filter(c => data.categories.includes(c.id));
 		if (categories.length === 0) throw new Error('No categories');
 		if (categories.length !== 1 && data.type === 'MESSAGE') throw new Error('Invalid number of categories for panel type');

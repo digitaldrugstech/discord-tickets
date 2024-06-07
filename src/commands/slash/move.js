@@ -47,8 +47,7 @@ module.exports = class MoveSlashCommand extends SlashCommand {
 		});
 
 		if (!ticket) {
-			const { locale } = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
-			const getMessage = client.i18n.getLocale(locale);
+			const getMessage = client.i18n.getLocale('ru');
 			return await interaction.editReply({
 				embeds: [
 					new ExtendedEmbedBuilder({
@@ -63,7 +62,7 @@ module.exports = class MoveSlashCommand extends SlashCommand {
 			});
 		}
 
-		const getMessage = client.i18n.getLocale(ticket.guild.locale);
+		const getMessage = client.i18n.getLocale('ru');
 
 		if (!(await isStaff(interaction.guild, interaction.user.id))) { // if user is not staff
 			return await interaction.editReply({

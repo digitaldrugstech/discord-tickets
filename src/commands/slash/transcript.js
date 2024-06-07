@@ -150,8 +150,7 @@ module.exports = class TranscriptSlashCommand extends SlashCommand {
 			ticket.createdById !== interaction.member.id &&
 			!(await isStaff(interaction.guild, interaction.member.id))
 		) {
-			const settings = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
-			const getMessage = client.i18n.getLocale(settings.locale);
+			const getMessage = client.i18n.getLocale('ru');
 			return await interaction.editReply({
 				embeds: [
 					new ExtendedEmbedBuilder({

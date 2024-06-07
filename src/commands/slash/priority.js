@@ -57,7 +57,7 @@ module.exports = class PrioritySlashCommand extends SlashCommand {
 		await interaction.deferReply();
 
 		const settings = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
-		const getMessage = client.i18n.getLocale(settings.locale);
+		const getMessage = client.i18n.getLocale('ru');
 		const ticket = await client.prisma.ticket.findUnique({
 			include: { category: { select: { channelName: true } } },
 			where: { id: interaction.channel.id },
