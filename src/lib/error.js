@@ -30,7 +30,16 @@ module.exports.handleInteractionError = async event => {
 	} else if (interaction.isCommand()) {
 		client.log.error.commands(`"${event.command.name}" command execution error:`, error);
 	}
-	const getMessage = client.i18n.getLocale('ru');
+
+
+	let locale = null;
+	if (interaction.guild) {
+		locale = (await client.prisma.guild.findUnique({
+			select: { locale: true },
+			where: { id: interaction.guild.id },
+		})).locale;
+	}
+	const getMessage = client.i18n.getLocale(locale);
 
 	const data = {
 		components: [],

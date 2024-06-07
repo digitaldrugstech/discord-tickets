@@ -82,7 +82,7 @@ async function logAdminEvent(client, {
 		? 'Green' : action === 'update'
 			? 'Orange' : action === 'delete'
 				? 'Red' : 'Default';
-	const getMessage = client.i18n.getLocale('ru');
+	const getMessage = client.i18n.getLocale(settings.locale);
 	const i18nOptions = {
 		user: `<@${member.user.id}>`,
 		verb: getMessage(`log.admin.verb.${action}`),
@@ -151,7 +151,7 @@ async function logTicketEvent(client, {
 				? 'Purple' : action === 'claim'
 					? 'LuminousVividPink' : action === 'unclaim'
 						? 'DarkVividPink' : 'Default';
-	const getMessage = client.i18n.getLocale('ru');
+	const getMessage = client.i18n.getLocale(ticket.guild.locale);
 	const i18nOptions = {
 		user: `<@${member.user.id}>`,
 		verb: getMessage(`log.ticket.verb.${action}`),
@@ -202,7 +202,7 @@ async function logMessageEvent(client, {
 	const colour = action === 'update'
 		? 'Purple' : action === 'delete'
 			? 'DarkPurple' : 'Default';
-	const getMessage = client.i18n.getLocale('ru');
+	const getMessage = client.i18n.getLocale(ticket.guild.locale);
 	const i18nOptions = {
 		user: `<@${executor?.user.id}>`,
 		verb: getMessage(`log.message.verb.${action}`),

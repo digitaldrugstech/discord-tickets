@@ -29,7 +29,7 @@ module.exports = class PinMessageCommand extends MessageCommand {
 
 		if (!ticket) {
 			const settings = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
-			const getMessage = client.i18n.getLocale('ru');
+			const getMessage = client.i18n.getLocale(settings.locale);
 			return await interaction.editReply({
 				embeds: [
 					new ExtendedEmbedBuilder({
@@ -43,7 +43,7 @@ module.exports = class PinMessageCommand extends MessageCommand {
 			});
 		}
 
-		const getMessage = client.i18n.getLocale('ru');
+		const getMessage = client.i18n.getLocale(ticket.guild.locale);
 
 		if (!interaction.targetMessage.pinnable) {
 			return await interaction.editReply({

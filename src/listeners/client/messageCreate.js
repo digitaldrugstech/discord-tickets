@@ -30,7 +30,7 @@ module.exports = class extends Listener {
 	 * @param {import("discord.js").ButtonInteraction|import("discord.js").SelectMenuInteraction} interaction
 	 */
 	async useGuild(settings, interaction, topic) {
-		const getMessage = this.client.i18n.getLocale('ru');
+		const getMessage = this.client.i18n.getLocale(settings.locale);
 		if (settings.categories.length === 0) {
 			interaction.update({
 				components: [],
@@ -108,7 +108,7 @@ module.exports = class extends Listener {
 					},
 					where: { id: commonGuilds.at(0).id },
 				});
-				const getMessage = client.i18n.getLocale('ru');
+				const getMessage = client.i18n.getLocale(settings.locale);
 				const sent = await message.reply({
 					components: [
 						new ActionRowBuilder()
@@ -182,7 +182,7 @@ module.exports = class extends Listener {
 		} else {
 			const settings = await client.prisma.guild.findUnique({ where: { id: message.guild.id } });
 			if (!settings) return;
-			const getMessage = client.i18n.getLocale('ru');
+			const getMessage = client.i18n.getLocale(settings.locale);
 			let ticket = await client.prisma.ticket.findUnique({ where: { id: message.channel.id } });
 
 			if (ticket) {

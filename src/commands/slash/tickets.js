@@ -43,7 +43,7 @@ module.exports = class TicketsSlashCommand extends SlashCommand {
 		const member = interaction.options.getMember('member', false) ?? interaction.member;
 		const ownOrOther = member.id === interaction.member.id ? 'own' : 'other';
 		const settings = await client.prisma.guild.findUnique({ where: { id: interaction.guild.id } });
-		const getMessage = client.i18n.getLocale('ru');
+		const getMessage = client.i18n.getLocale(settings.locale);
 
 		if (member.id !== interaction.member.id && !(await isStaff(interaction.guild, interaction.member.id))) {
 			return await interaction.editReply({

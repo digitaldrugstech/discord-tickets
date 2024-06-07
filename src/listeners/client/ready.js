@@ -120,7 +120,7 @@ module.exports = class extends Listener {
 						select: { guild: true },
 						where: { id: ticketId },
 					});
-					const getMessage = client.i18n.getLocale('ru');
+					const getMessage = client.i18n.getLocale(guild.locale);
 					await channel.send({
 						embeds: [
 							new ExtendedEmbedBuilder()
@@ -162,7 +162,7 @@ module.exports = class extends Listener {
 							else ping = ticket.category.pingRoles.map(r => `<@&${r}>`).join(' ');
 						}
 
-						const getMessage = client.i18n.getLocale('ru');
+						const getMessage = client.i18n.getLocale(guild.locale);
 						const closeComamnd = client.application.commands.cache.find(c => c.name === 'close');
 						const sent = await channel.send({
 							components: [
