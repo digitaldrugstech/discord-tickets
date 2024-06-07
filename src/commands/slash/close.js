@@ -7,10 +7,9 @@ module.exports = class CloseSlashCommand extends SlashCommand {
 		super(client, {
 			...options,
 			description: client.i18n.getMessage(null, `commands.slash.${name}.description`),
-			descriptionLocalizations: client.i18n.getMessage('en-GB', `commands.slash.${name}.description`),
+			descriptionLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.description`),
 			dmPermission: false,
 			name,
-			nameLocalizations: client.i18n.getMessage('en-GB', `commands.slash.${name}.name`),
 			options: [
 				{
 					name: 'reason',
@@ -18,9 +17,8 @@ module.exports = class CloseSlashCommand extends SlashCommand {
 					type: ApplicationCommandOptionType.String,
 				},
 			].map(option => {
-				option.descriptionLocalizations = client.i18n.getMessage('en-GB', `commands.slash.${name}.options.${option.name}.description`);
+				option.descriptionLocalizations = client.i18n.getAllMessages(`commands.slash.${name}.options.${option.name}.description`);
 				option.description = option.descriptionLocalizations['en-GB'];
-				option.nameLocalizations = client.i18n.getMessage('en-GB', `commands.slash.${name}.options.${option.name}.name`);
 				return option;
 			}),
 		});
