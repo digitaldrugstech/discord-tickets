@@ -4,14 +4,13 @@ const { ApplicationCommandOptionType } = require('discord.js');
 module.exports = class CloseSlashCommand extends SlashCommand {
 	constructor(client, options) {
 		const name = 'close';
-		const getLocale = client.i18n.getLocale('en-GB');
 		super(client, {
 			...options,
 			description: client.i18n.getMessage(null, `commands.slash.${name}.description`),
-			descriptionLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.description`),
+			descriptionLocalizations: client.i18n.getMessage('en-GB', `commands.slash.${name}.description`),
 			dmPermission: false,
 			name,
-			nameLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.name`),
+			nameLocalizations: client.i18n.getMessage('en-GB', `commands.slash.${name}.name`),
 			options: [
 				{
 					name: 'reason',
@@ -19,9 +18,9 @@ module.exports = class CloseSlashCommand extends SlashCommand {
 					type: ApplicationCommandOptionType.String,
 				},
 			].map(option => {
-				option.descriptionLocalizations = getLocale(`commands.slash.${name}.options.${option.name}.description`);
+				option.descriptionLocalizations = client.i18n.getMessage('en-GB', `commands.slash.${name}.options.${option.name}.description`);
 				option.description = option.descriptionLocalizations['en-GB'];
-				option.nameLocalizations = getLocale(`commands.slash.${name}.options.${option.name}.name`);
+				option.nameLocalizations = client.i18n.getMessage('en-GB', `commands.slash.${name}.options.${option.name}.name`);
 				return option;
 			}),
 		});
