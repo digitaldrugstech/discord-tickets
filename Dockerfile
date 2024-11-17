@@ -20,21 +20,15 @@ COPY --link . .
 # === Runner Stage ===
 FROM node:18-alpine AS runner
 
-RUN apk --no-cache add curl \
-    && adduser --disabled-password --home /home/container container
+RUN apk --no-cache add curl
 
-WORKDIR /home/container
-RUN mkdir -p /app \
-    && chown container:container /app \
-    && chmod -R 755 /app
+WORKDIR /app
 
-ENV USER=container \
-    HOME=/home/container \
-    NODE_ENV=production \
+ENV NODE_ENV=production \
     HTTP_HOST=0.0.0.0 \
     DOCKER=true
 
-COPY --from=builder --chown=container:container /build /app
+COPY --from=builder /build /app
 
 RUN chmod +x /app/scripts/start.sh
 
