@@ -370,12 +370,16 @@ module.exports = class TicketManager {
 		let answers;
 		if (interaction.isModalSubmit()) {
 			if (action === 'questions') {
-				answers = category.questions.filter(q => q.type === 'TEXT').map(q => ({
-					questionId: q.id,
-					userId: interaction.user.id,
-					value: interaction.fields.getTextInputValue(q.id) ? encrypt(interaction.fields.getTextInputValue(q.id)) : '',
-				}));
-				if (category.customTopic) topic = interaction.fields.getTextInputValue(category.customTopic);
+				if (category.questions && category.questions.length > 0) {
+					answers = category.questions.filter(q => q.type === 'TEXT').map(q => ({
+						questionId: q.id,
+						userId: interaction.user.id,
+						value: interaction.fields.getTextInputValue(q.id) ? encrypt(interaction.fields.getTextInputValue(q.id)) : '',
+					}));
+					if (category.customTopic) topic = interaction.fields.getTextInputValue(category.customTopic);
+				} else {
+					throw new Error('No questions found in the category.');
+				}
 			} else if (action === 'topic') {
 				topic = interaction.fields.getTextInputValue('topic');
 			}
