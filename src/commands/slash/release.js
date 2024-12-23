@@ -9,7 +9,6 @@ module.exports = class ReleaseSlashCommand extends SlashCommand {
 			descriptionLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.description`),
 			dmPermission: false,
 			name,
-			nameLocalizations: client.i18n.getAllMessages(`commands.slash.${name}.name`),
 		});
 	}
 

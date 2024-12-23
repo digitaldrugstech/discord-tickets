@@ -539,6 +539,20 @@ module.exports = class TicketManager {
 		}
 
 		/** @type {import("discord.js").Message|undefined} */
+		const data = {
+			category: { connect: { id: categoryId } },
+			createdBy: {
+				connectOrCreate: {
+					create: { id: interaction.user.id },
+					where: { id: interaction.user.id },
+				},
+			},
+			guild: { connect: { id: category.guild.id } },
+			id: channel.id,
+			number,
+			openingMessageId: sent.id,
+			topic: topic ? encrypt(topic) : null,
+		};
 		let message;
 		if (referencesMessageId) {
 			/** @type {import("discord.js").Message} */
@@ -587,6 +601,7 @@ module.exports = class TicketManager {
 			// TODO: add portal url
 			const ticket = await this.client.prisma.ticket.findUnique({ where: { id: referencesTicketId } });
 			if (ticket) {
+				data.referencesTicket = { connect: { id: referencesTicketId } };
 				const embed = new ExtendedEmbedBuilder({
 					iconURL: guild.iconURL(),
 					text: category.guild.footer,
@@ -616,22 +631,6 @@ module.exports = class TicketManager {
 				await channel.send({ embeds: [embed] });
 			}
 		}
-
-		const data = {
-			category: { connect: { id: categoryId } },
-			createdBy: {
-				connectOrCreate: {
-					create: { id: interaction.user.id },
-					where: { id: interaction.user.id },
-				},
-			},
-			guild: { connect: { id: category.guild.id } },
-			id: channel.id,
-			number,
-			openingMessageId: sent.id,
-			topic: topic ? encrypt(topic) : null,
-		};
-		if (referencesTicketId) data.referencesTicket = { connect: { id: referencesTicketId } };
 		if (answers) data.questionAnswers = { createMany: { data: answers } };
 
 		await interaction.editReply({
