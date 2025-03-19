@@ -70,7 +70,7 @@
 		"node-emoji": "^1.11.0",
 		"object-diffy": "^1.0.4",
 		"prisma": "^4.16.2",
-		"semver": "^7.6.3",
+		"semver": "^7.7.0",
 		"short-unique-id": "^4.4.4",
 		"spacetime": "^7.6.2",
 		"terminal-link": "^2.1.1",
