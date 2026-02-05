@@ -10,3 +10,4 @@ prisma/
 *.db*
 *.log
 summary.md
+.claude
